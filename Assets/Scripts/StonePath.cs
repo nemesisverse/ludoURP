@@ -33,7 +33,12 @@ public class StonePath : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameObject otherObject = GameObject.Find("GameManagerr");
+
+        if (otherObject != null)
+        {
+            gameManager = otherObject.GetComponent<GameManager>();
+        }
     }
 
     // Update is called once per frame
@@ -70,10 +75,25 @@ public class StonePath : MonoBehaviour
             while (travelPercent < 1f)
             {
                 travelPercent += Time.deltaTime;
-                transform.position = Vector3.Lerp(transform.position, Path[targetNodeIndex].transform.position, travelPercent);
+
+               
+                    transform.position = Vector3.Lerp(transform.position, Path[targetNodeIndex].transform.position, travelPercent);
+
+
+               //if ((transform.position - Path[targetNodeIndex].transform.position) == Vector3.zero)
+               //{
+               //    gameManager.RollDiceDelay();
+               //
+               //}
+
                 yield return new WaitForEndOfFrame();
-                currentNodeIndex = targetNodeIndex;
+                    currentNodeIndex = targetNodeIndex;
+
+             
             }
+
+
+
 
         }
     

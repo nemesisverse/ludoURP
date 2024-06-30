@@ -2,9 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static GameManager;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+
+    /// <summary>
+    public TextMeshProUGUI Text;
+    /// </summary>
+
+
 
     public bool hasturn;
     public bool haswon;
@@ -41,9 +48,10 @@ public class GameManager : MonoBehaviour
     {
         int roll = Random.Range(1, 7);
         Debug.Log(roll);
+        Text.text = roll.ToString();
 
 
-       
+
         int chooseStone = Random.Range(0, 4);
 
         if (roll == 6)
@@ -98,6 +106,8 @@ public class GameManager : MonoBehaviour
             
             }
 
+            
+
 
             
 
@@ -108,10 +118,10 @@ public class GameManager : MonoBehaviour
         return roll;
     }
 
-    IEnumerator RollDiceDelay()
+    public IEnumerator RollDiceDelay()
     {
         
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0);
         RollDice();
 
 
@@ -136,7 +146,12 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-      playertype = player_types.cpu;
+        if (Text == null)
+        {
+            Text = GameObject.Find("DiceRolled").GetComponent<TextMeshProUGUI>();
+            Text.text = "start";
+        }
+        playertype = player_types.cpu;
     }
 
     // Update is called once per frame
@@ -150,8 +165,9 @@ public class GameManager : MonoBehaviour
                 {
                     case states.Roll_Dice:
                         {
-                            StartCoroutine(RollDiceDelay());
-                            state = states.Waiting;
+                        StartCoroutine(RollDiceDelay());
+                        
+                        state = states.Waiting;
                         }
 
                         break;
