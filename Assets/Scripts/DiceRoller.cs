@@ -9,7 +9,8 @@ public class DiceRoller : MonoBehaviour
     //this script is for text in textmeshpro
     TMP_Text Text;
 
-    //GameManager diceNumber;
+    GameManager diceNumber;
+
  
         
 
@@ -24,7 +25,7 @@ public class DiceRoller : MonoBehaviour
     private void Update()
     {
         
-        //int Roll = diceNumber.RollDice();
-        //Text.text = Roll.ToString();
+        int Roll = diceNumber.RollDice();
+        Text.text = Roll.ToString();
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static GameManager;
 using TMPro;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,7 +12,9 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI Text;
     /// </summary>
 
+   public GameObject GameManagerr1;
 
+    bool switchingPlayer;
 
     public bool hasturn;
     public bool haswon;
@@ -74,14 +77,7 @@ public class GameManager : MonoBehaviour
 
 
                     mystones[chooseStone].StartCoroutine(mystones[chooseStone].MoveOnTrack(roll));
-                    ///mystones[chooseStone].nextStep = mystones[chooseStone].Path[steps + roll];
-
-
-                    //transform.position = Vector3.Lerp(mystones[chooseStone].transform.position, mystones[chooseStone].nextStep.transform.position, 1f);
-
-
-
-
+              
 
                 }
             }
@@ -131,18 +127,26 @@ public class GameManager : MonoBehaviour
    
 
 
+    public IEnumerator SwitchPlayer()
+    {
+       // if(switchingPlayer)
+       // {
+       //     yield break;
+       // }
+       //
+       // switchingPlayer = true;
+        yield return new WaitForSeconds(1.3f);
+        GameManagerr1.SetActive(true);
+        gameObject.SetActive(false);
 
-    //public IEnumerator actionAfterDiceRoll()
-    //{
-    //
-    //    yield return new WaitForSeconds(3);
-    //}
+
+        //switchingPlayer = false;
 
 
 
-    //base to startnode  interpolation
+    }
 
-
+ 
 
     void Start()
     {
@@ -152,6 +156,8 @@ public class GameManager : MonoBehaviour
             Text.text = "start";
         }
         playertype = player_types.cpu;
+
+        GameObject otherGameManager1 = GameObject.Find("GameManagerr1");
     }
 
     // Update is called once per frame
@@ -166,7 +172,7 @@ public class GameManager : MonoBehaviour
                     case states.Roll_Dice:
                         {
                         StartCoroutine(RollDiceDelay());
-                        
+                        StartCoroutine(SwitchPlayer());
                         state = states.Waiting;
                         }
 
@@ -188,22 +194,7 @@ public class GameManager : MonoBehaviour
             }
 
 
-        
-
-        ///////////////////////////////////////////////////////////////////////////////////
-
-       //or(int i = (int)player_types.cpu; i < 3 ; i++)
-       //{
-       //
-       //   
-       //
-       //
-       //
-       //
-       //    i = i % 2;
-       //}
-
-        
+ 
 
     }
 }

@@ -9,8 +9,8 @@ public class StonePath : MonoBehaviour
 
     [SerializeField] public List<Waypoint> Path = new List<Waypoint>();
 
-    
 
+    public int stoneID;
     public bool isLock ;
     public Waypoint Base;
     public Waypoint StartingPoint;
